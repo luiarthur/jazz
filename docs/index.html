@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Jazz" content="luiarthur's jazz notes">
+    <meta name="Jazz Notes" content="luiarthur's jazz notes">
     <title>Jazz</title>
     
     <link rel="stylesheet" href="assets/css/main.css">
@@ -11,11 +11,35 @@
   <body>
     <div class="row">
       <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 offset-sm-1">
-        <h1> Jazz </h1>
-        <ul id="ul-scales"></ul>
+        <div class="banner">
+          <p class="align-left">Jazz Notes</p>
+          <p class="align-right">Arthur Lui</p>
+          <div class="clear"></div>
+        </div>
+        <br>
 
+        <h4> Modes / Special Scales</h4>
+        <table id="table-scales" class="table table-dark"></table>
+        <br><hr><br>
+
+        <h4> Scale Options for Chord Symbols </h4>
+        <table id="table-scale-options" class="table table-dark"></table>
+        <br><hr><br>
+
+        <h4> Chords Appropriate for Scales </h4>
+        <table id="table-implied-chords" class="table table-dark"></table>
+        <br><hr><br>
+
+        <div id="disqus_thread"></div>
       </div>
     </div>
     <script type="module" src="assets/js/main.js"></script>
+
+    <noscript>
+      Please enable JavaScript to view the 
+      <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus.
+      </a>
+    </noscript>
   </body>
 </html>
