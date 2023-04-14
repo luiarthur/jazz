@@ -36,17 +36,36 @@ function makeModes() {
         "diminished": {
             scale: "1 b2 b3 b4 b5 5 6 b7", from: "special", start: null,
             alias: ["half-whole"]
+        },
+        "major blues": {
+            scale: "1 2 b3 3 5 6", from: "special", start: null
+        },
+        "minor blues": {
+            scale: "1 b3 4 b5 b b7", from: "special",
+            start: null
+        },
+        "major pentatonic": {
+            scale: "1 2 3 5 6", from: "special", start: null
+        },
+        "minor pentatonic": {
+            scale: "1 b3 4 5 b7", from: "special", start: null
+        },
+        "whole tone": {
+            scale: "1 2 3 #4 #5 #6", from: "special", start: null
+        },
+        "major bebop": {
+            scale: "1 2 3 4 5 #5 6 7", from: "special", start: null
+        },
+        "melodic minor bebop": {
+            scale: "1 2 b3 4 5 #5 6 7", from: "special", start: null
+        },
+        "harmonic minor bebop": {
+            scale: "1 2 b3 4 5 b6 b7 7", from: "special", start: null
+        },
+        "dominant bebop": {
+            scale: "1 2 3 4 5 b6 b7 7", from: "special",
+            start: null
         }
-        // TODO: Complete the following:
-        // - Major Blues
-        // - Minor Blues
-        // - Major Pentatonic
-        // - Minor Pentatonic
-        // - HW (diminished)
-        // - Major Bebop
-        // - Melodic Minor Bebop
-        // - Harmonic Minor Bebop
-        // - Dominant Bebop: 1 2 3 4 5 b6 b7 7
     }
 
     for (const name in modes) {
