@@ -1,107 +1,88 @@
 import { modes, scaleOptions, impliedChords } from "./scales.js"
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm"
 import "./disqus.js"
 
-function create(tag, html) {
-    const elem = document.createElement(tag)
-    if (html) {
-        elem.innerHTML = html
-    }
-    return elem
-}
+const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1)
 
 function renderModes(id) {
-    const node = document.getElementById(id)
-    const thead = create("thead")
-    const tr = create("tr")
+    const headers = ["name", "scale", "from", "start"]
+    const thead = d3.select(id).append("thead")
+    const tbody = d3.select(id).append("tbody")
 
-    const headers = ["mode", "scale", "from", "start"]
-    headers.forEach(header => {
-        const th = create("th", header)
-        tr.appendChild(th)
-    })
-    thead.appendChild(tr)
+    // Make headers.
+    thead.append("tr")
+         .selectAll("th")
+         .data(headers)
+         .enter()
+         .append("th").text(d => capitalize(d))
 
-    const tbody = create("tbody")
-    for (const name in modes) {
-        const mode = modes[name]
-        const tr = create("tr")
+    const rows = tbody.selectAll("tr")
+        .data(modes)
+        .enter()
+        .append('tr')
 
-        headers.forEach(item => {
-            const td = create("td", mode[item])
-            tr.appendChild(td)
-        })
-
-        tbody.appendChild(tr)
-    }
-
-    node.appendChild(thead)
-    node.appendChild(tbody)
+    rows.selectAll('td')
+        .data(row => headers.map(key => row[key]))
+        .enter()
+        .append('td')
+        .text(d => d)
 }
 
 function renderScaleOptions(id) {
-    const node = document.getElementById(id)
+    const headers = ["chord", "scales"]
+    const thead = d3.select(id).append("thead")
+    const tbody = d3.select(id).append("tbody")
 
-    // Header
-    const thead = create("thead")
-    const tr = create("tr")
-    const headers = ["Chord Symbol", "Scale"]
+    // Make headers.
+    thead.append("tr")
+         .selectAll("th")
+         .data(headers)
+         .enter()
+         .append("th").text(d => capitalize(d))
 
-    headers.forEach(header => {
-        const th = create("th", header)
-        tr.appendChild(th)
-    })
-    thead.appendChild(tr)
+    const rows = tbody.selectAll("tr")
+        .data(scaleOptions)
+        .enter()
+        .append('tr')
 
-    // Body
-    const tbody = create("tbody")
-    for (const chord in scaleOptions) {
-        const scales = scaleOptions[chord].join(", ")
-        const tr = create("tr")
-
-        tr.appendChild(create("td", chord))
-        tr.appendChild(create("td", scales))
-        tbody.appendChild(tr)
-    }
-
-    node.appendChild(thead)
-    node.appendChild(tbody)
+    rows.selectAll('td')
+        .data(row => headers.map(key => 
+            (key == "scales") ? row[key].join(", ") : row[key]
+        ))
+        .enter()
+        .append('td')
+        .text(d => d)
 }
 
 function renderImpliedChords(id) {
-    const node = document.getElementById(id)
+    const headers = ["scale", "chords"]
+    const thead = d3.select(id).append("thead")
+    const tbody = d3.select(id).append("tbody")
 
-    // Header
-    const thead = create("thead")
-    const tr = create("tr")
+    // Make headers.
+    thead.append("tr")
+         .selectAll("th")
+         .data(headers)
+         .enter()
+         .append("th").text(d => capitalize(d))
 
-    const headers = ["Scale", "Chord Symbols"]
-    headers.forEach(header => {
-        const th = create("th", header)
-        tr.appendChild(th)
-    })
-    thead.appendChild(tr)
+    const rows = tbody.selectAll("tr")
+        .data(impliedChords)
+        .enter()
+        .append('tr')
 
-    // Body
-    const tbody = create("tbody")
-    for (const scale in impliedChords) {
-        const chord = impliedChords[scale].join(", ")
-        const tr = create("tr")
-
-        tr.appendChild(create("td", scale))
-        tr.appendChild(create("td", chord))
-        tbody.appendChild(tr)
-    }
-
-    node.appendChild(thead)
-    node.appendChild(tbody)
-
+    rows.selectAll('td')
+        .data(row => headers.map(key => row[key]))
+        .enter()
+        .append('td')
+        .text(d => d)
  }
 
 function main() {
     // Main.
-    renderModes("table-scales")
-    renderScaleOptions("table-scale-options")
-    renderImpliedChords("table-implied-chords")
+    renderModes("#table-scales")
+    renderScaleOptions("#table-scale-options")
+    renderImpliedChords("#table-implied-chords")
 
     // Test. Remove when done.
     console.log(modes)

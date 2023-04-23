@@ -1,105 +1,114 @@
-function makeModes() {
-    const modes = {
-        // Major scale modes.
-        ionian: {scale: "1 2 3 4 5 6 7", from: "major", start: 1},
-        dorian: {scale: "1 2 b3 4 5 6 b7", from: "major", start: 2},
-        phrygian: {scale: "1 b2 b3 4 5 b6 b7", from: "major", start: 3},
-        lydian: {scale: "1 2 3 #4 5 6 7", from: "major", start: 4},
-        mixolydian: {scale: "1 2 3 4 5 6 b7", from: "major", start: 5},
-        aeolian: {scale: "1 2 b3 4 5 b6 b7", from: "major", start: 6},
-        locrian: {scale: "1 b2 b3 4 b5 b6 b7", from: "major", start: 7},
-        // Minor scale modes.
-        "jazz melodic minor": {
-            scale: "1 2 b3 4 5 6 7", from: "melodic minor asc", start: 1
-        },
-        "dorian b2": {
-            scale: "1 b2 b3 4 5 6 b7", from: "melodic minor asc", start: 2
-        },
-        "lydian augmented": {
-            scale: "1 2 3 #4 #5 6 7", from: "melodic minor asc", start: 3
-        },
-        "lydian dominant": {
-            scale: "1 2 3 #4 5 6 b7", from: "melodic minor asc", start: 4
-        },
-        "mixolydian b6": {
-            scale: "1 2 3 4 5 b6 b7", from: "melodic minor asc", start: 5
-        },
-        "half diminished": {
-            scale: "1 2 b3 4 b5 b6 b7", from: "melodic minor asc", start: 6,
-            alias: ["locrian b2"]
-        },
-        "altered scale": {
-            scale: "1 b2 b3 b4 b5 b6 b7", from: "melodic minor asc", start: 7,
-            alias: ["super locrian"]
-        },
-        // Special Scales
-        "diminished": {
-            scale: "1 b2 b3 b4 b5 5 6 b7", from: "special", start: null,
-            alias: ["half-whole"]
-        },
-        "major blues": {
-            scale: "1 2 b3 3 5 6", from: "special", start: null
-        },
-        "minor blues": {
-            scale: "1 b3 4 b5 b b7", from: "special",
-            start: null
-        },
-        "major pentatonic": {
-            scale: "1 2 3 5 6", from: "special", start: null
-        },
-        "minor pentatonic": {
-            scale: "1 b3 4 5 b7", from: "special", start: null
-        },
-        "whole tone": {
-            scale: "1 2 3 #4 #5 #6", from: "special", start: null
-        },
-        "major bebop": {
-            scale: "1 2 3 4 5 #5 6 7", from: "special", start: null
-        },
-        "melodic minor bebop": {
-            scale: "1 2 b3 4 5 #5 6 7", from: "special", start: null
-        },
-        "harmonic minor bebop": {
-            scale: "1 2 b3 4 5 b6 b7 7", from: "special", start: null
-        },
-        "dominant bebop": {
-            scale: "1 2 3 4 5 b6 b7 7", from: "special",
-            start: null
-        }
+const modes = [
+    // Major scale modes.
+    {name: "ionian", scale: "1 2 3 4 5 6 7", from: "major", start: 1},
+    {name: "dorian", scale: "1 2 b3 4 5 6 b7", from: "major", start: 2},
+    {name: "phrygian", scale: "1 b2 b3 4 5 b6 b7", from: "major", start: 3},
+    {name: "lydian", scale: "1 2 3 #4 5 6 7", from: "major", start: 4},
+    {name: "mixolydian", scale: "1 2 3 4 5 6 b7", from: "major", start: 5},
+    {name: "aeolian", scale: "1 2 b3 4 5 b6 b7", from: "major", start: 6},
+    {name: "locrian", scale: "1 b2 b3 4 b5 b6 b7", from: "major", start: 7},
+    // Minor scale modes.
+    {
+        name: "jazz melodic minor", scale: "1 2 b3 4 5 6 7",
+        from: "melodic minor asc", start: 1
+    },
+    {
+        name: "dorian b2", scale: "1 b2 b3 4 5 6 b7",
+        from: "melodic minor asc", start: 2
+    },
+    {
+        name: "lydian augmented", scale: "1 2 3 #4 #5 6 7",
+        from: "melodic minor asc", start: 3
+    },
+    {
+        name: "lydian dominant", scale: "1 2 3 #4 5 6 b7",
+        from: "melodic minor asc", start: 4
+    },
+    {
+        name: "mixolydian b6", scale: "1 2 3 4 5 b6 b7",
+        from: "melodic minor asc", start: 5
+    },
+    {
+        name: "half diminished", scale: "1 2 b3 4 b5 b6 b7",
+        from: "melodic minor asc", start: 6, alias: ["locrian b2"]
+    },
+    {
+        name: "altered scale", scale: "1 b2 b3 b4 b5 b6 b7",
+        from: "melodic minor asc", start: 7, alias: ["super locrian"]
+    },
+    // Special Scales
+    {
+        name: "diminished",
+        scale: "1 b2 b3 b4 b5 5 6 b7", from: "special", start: null,
+        alias: ["half-whole"]
+    },
+    {
+        name: "major blues",
+        scale: "1 2 b3 3 5 6", from: "special", start: null
+    },
+    {
+        name: "minor blues",
+        scale: "1 b3 4 b5 b b7", from: "special",
+        start: null
+    },
+    {
+        name: "major pentatonic",
+        scale: "1 2 3 5 6", from: "special", start: null
+    },
+    {
+        name: "minor pentatonic",
+        scale: "1 b3 4 5 b7", from: "special", start: null
+    },
+    {
+        name: "whole tone",
+        scale: "1 2 3 #4 #5 #6", from: "special", start: null
+    },
+    {
+        name: "major bebop",
+        scale: "1 2 3 4 5 #5 6 7", from: "special", start: null
+    },
+    {
+        name: "melodic minor bebop",
+        scale: "1 2 b3 4 5 #5 6 7", from: "special", start: null
+    },
+    {
+        name: "harmonic minor bebop",
+        scale: "1 2 b3 4 5 b6 b7 7", from: "special", start: null
+    },
+    {
+        name: "dominant bebop",
+        scale: "1 2 3 4 5 b6 b7 7", from: "special",
+        start: null
     }
+]
 
-    for (const name in modes) {
-        modes[name].mode = name
-    }
-    return modes
-}
-
-const modes = makeModes()
-
-const scaleOptions = {
-    "M7": ["ionian", "lydian"],
-    "M6": ["ionian", "lydian"],
-    "m7": ["dorian", "aeolian"],
-    "m6": ["dorian"],
-    "mM7": ["jazz melodic minor"],
-    "7": ["mixolydian", "altered scale", "lydian dominant"],
-    "dim": ["diminished"],
-    "m7b5": ["half diminished", "locrian"],
-    "7alt": ["altered scale"],
-}
+const scaleOptions = [
+    {chord: "M7", scales: ["ionian", "lydian"]},
+    {chord: "M6", scales: ["ionian", "lydian"]},
+    {chord: "m7", scales: ["dorian", "aeolian"]},
+    {chord: "m6", scales: ["dorian"]},
+    {chord: "mM7", scales: ["jazz melodic minor"]},
+    {chord: "7", scales: ["mixolydian", "altered scale", "lydian dominant"]},
+    {chord: "dim", scales: ["diminished"]},
+    {chord: "m7b5", scales: ["half diminished", "locrian"]},
+    {chord: "7alt", scales: ["altered scale"]}
+]
 
 function makeImpliedChords() {
     const impliedChords = {}
 
-    for (const chord in scaleOptions) {
-        const scales = scaleOptions[chord]
-        scales.forEach(scale => {
+    scaleOptions.forEach(data => {
+        data.scales.forEach(scale => {
             !(scale in impliedChords) && (impliedChords[scale] = [])
-            impliedChords[scale].push(chord)
+            impliedChords[scale].push(data.chord)
         })
-    }
+    })
 
-    return impliedChords
+    const scales = Object.keys(impliedChords)
+    return scales.map(scale => ({
+        "scale": scale,
+        chords: impliedChords[scale].join(", ")
+    }))
 }
 const impliedChords = makeImpliedChords()
 
