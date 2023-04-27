@@ -6,7 +6,7 @@ const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1)
 
 function renderModes(id) {
     const headers = ["name", "scale", "from", "start"]
-    const thead = d3.select(id).append("thead")
+    const thead = d3.select(id).append("thead").classed("table-dark", true)
     const tbody = d3.select(id).append("tbody")
 
     // Make headers.
@@ -30,7 +30,7 @@ function renderModes(id) {
 
 function renderScaleOptions(id) {
     const headers = ["chord", "scales"]
-    const thead = d3.select(id).append("thead")
+    const thead = d3.select(id).append("thead").classed("table-dark", true)
     const tbody = d3.select(id).append("tbody")
 
     // Make headers.
@@ -56,7 +56,7 @@ function renderScaleOptions(id) {
 
 function renderImpliedChords(id) {
     const headers = ["scale", "chords"]
-    const thead = d3.select(id).append("thead")
+    const thead = d3.select(id).append("thead").classed("table-dark", true)
     const tbody = d3.select(id).append("tbody")
 
     // Make headers.
