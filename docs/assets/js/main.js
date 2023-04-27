@@ -4,8 +4,11 @@ import "./disqus.js"
 
 const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1)
 
-function renderModes(id) {
-    const headers = ["name", "scale", "from", "start"]
+function renderTable({id, headers, data}) {
+    // Style the table.
+    d3.select(id).node().classList.add(
+        "table", "table-striped", "table-bordered"
+    )
     const thead = d3.select(id).append("thead").classed("table-dark", true)
     const tbody = d3.select(id).append("tbody")
 
@@ -16,66 +19,42 @@ function renderModes(id) {
          .enter()
          .append("th").text(d => capitalize(d))
 
+    // Append rows.
     const rows = tbody.selectAll("tr")
-        .data(modes)
+        .data(data)
         .enter()
         .append('tr')
 
+    // Fill out elements in rows.
     rows.selectAll('td')
         .data(row => headers.map(key => row[key]))
         .enter()
         .append('td')
         .text(d => d)
+}
+
+function renderModes(id) {
+    renderTable({
+        id: id,
+        data: modes,
+        headers: ["name", "scale", "from", "start"]
+    })
 }
 
 function renderScaleOptions(id) {
-    const headers = ["chord", "scales"]
-    const thead = d3.select(id).append("thead").classed("table-dark", true)
-    const tbody = d3.select(id).append("tbody")
-
-    // Make headers.
-    thead.append("tr")
-         .selectAll("th")
-         .data(headers)
-         .enter()
-         .append("th").text(d => capitalize(d))
-
-    const rows = tbody.selectAll("tr")
-        .data(scaleOptions)
-        .enter()
-        .append('tr')
-
-    rows.selectAll('td')
-        .data(row => headers.map(key => 
-            (key == "scales") ? row[key].join(", ") : row[key]
-        ))
-        .enter()
-        .append('td')
-        .text(d => d)
+    renderTable({
+        id: id,
+        headers: ["chord", "scales"],
+        data: scaleOptions
+    })
 }
 
 function renderImpliedChords(id) {
-    const headers = ["scale", "chords"]
-    const thead = d3.select(id).append("thead").classed("table-dark", true)
-    const tbody = d3.select(id).append("tbody")
-
-    // Make headers.
-    thead.append("tr")
-         .selectAll("th")
-         .data(headers)
-         .enter()
-         .append("th").text(d => capitalize(d))
-
-    const rows = tbody.selectAll("tr")
-        .data(impliedChords)
-        .enter()
-        .append('tr')
-
-    rows.selectAll('td')
-        .data(row => headers.map(key => row[key]))
-        .enter()
-        .append('td')
-        .text(d => d)
+    renderTable({
+        id: id,
+        headers: ["scale", "chords"],
+        data: impliedChords
+    }) 
  }
 
 function main() {
