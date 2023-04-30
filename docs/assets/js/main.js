@@ -1,4 +1,5 @@
 import { modes, scaleOptions, impliedChords } from "./scales.js"
+import { renderNavBar } from "./navbar.js"
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm"
 import "./disqus.js"
 
@@ -55,13 +56,14 @@ function renderImpliedChords(id) {
         headers: ["scale", "chords"],
         data: impliedChords
     }) 
- }
+}
 
 function main() {
     // Main.
     renderModes("#table-scales")
     renderScaleOptions("#table-scale-options")
     renderImpliedChords("#table-implied-chords")
+    renderNavBar("#navbar-anchor")
 
     // Test. Remove when done.
     console.log(modes)
