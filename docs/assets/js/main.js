@@ -58,7 +58,47 @@ function renderImpliedChords(id) {
     }) 
 }
 
-function renderMajor7(id) {}
+const exercises = [
+    {
+        id: "div-major-7-circle",
+        abc: [
+            "L:1",
+            "K:C",
+            '|:' +
+            [
+                '"Cmaj7"[EGBd]', '"Fmaj7"[A,CEG]',
+                '"Bbmaj7"[DFAc]', '"Ebmaj7"[GBDF]',
+            ].join("|")
+            + ':|'
+        ]
+    }
+]
+
+// FIXME: Does not redraw on resize ...
+// document.addEventListener("resize", (event) => {
+//     renderExercise(exercises)
+// })
+ 
+function renderExercise(exercises) {
+    const width = window.innerWidth
+    const segments = [200, 400, 500]
+    let staffwidth = 100
+    segments.forEach(s => {
+        if (s < width) {
+            staffwidth = s - 20
+        }
+    })
+    console.log(width)
+    console.log(staffwidth)
+
+    const id = exercises.map(obj => obj.id)
+    const abc = exercises.map(obj => obj.abc.join("\n"))
+    ABCJS.renderAbc(
+        id,
+        abc.join("\n"),
+        {wrap: true, staffwidth: staffwidth}
+    )
+}
 
 function main() {
     // Main.
@@ -66,7 +106,7 @@ function main() {
     renderScaleOptions("#table-scale-options")
     renderImpliedChords("#table-implied-chords")
     renderNavBar("#navbar-anchor")
-    renderMajor7("#div-major-7-circle")
+    renderExercise(exercises)
 
     // Test. Remove when done.
     console.log(modes)

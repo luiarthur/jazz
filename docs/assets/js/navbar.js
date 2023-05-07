@@ -16,14 +16,8 @@ function tag({type, id, classes, attr}) {
     return elem
 }
 
-export function renderNavBar(anchor) {
-    const temp = document.querySelector("#template-navbar")
-    const clon = temp.content.cloneNode(true)
-    document.querySelector(anchor).appendChild(clon)
-}
-
 // https://getbootstrap.com/docs/5.2/components/navbar/
-export function renderNavBarX(anchor) {
+export function renderNavBar(anchor) {
     const result = document.querySelector(anchor)
     result.classList.add(
         "navbar", "navbar-expand-lg", "navbar-light", "bg-light"
@@ -75,7 +69,8 @@ export function renderNavBarX(anchor) {
     const items = [
         {link: "#table-scales", text: "Modes"},
         {link: "#table-scale-options", text: "Scale Options"},
-        {link: "#table-implied-chords", text: "Implied Chords"}
+        {link: "#table-implied-chords", text: "Implied Chords"},
+        {link: "#div-major-7-circle", text: "Major 7 Circle"},
     ]
 
     items.forEach((item, i) => {
