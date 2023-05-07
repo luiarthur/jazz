@@ -64,12 +64,16 @@ const exercises = [
         abc: [
             "L:1",
             "K:C",
-            '|:' +
             [
                 '"Cmaj7"[EGBd]', '"Fmaj7"[A,CEG]',
-                '"Bbmaj7"[DFAc]', '"Ebmaj7"[GBDF]',
+                '"Bbmaj7"[DFAc]', '"Ebmaj7"[G_Bdf]',
+                '"Abmaj7"[C_EG_B]', '"Dbmaj7"[F_Ac_e]',
+                '"F#maj7"[^A^c^e^g]', '"Bmaj7"[^D^F^A^c]',
+                '"Emaj7"[^GB^d^f]', '"Amaj7"[^CE^GB]',
+                '"Dmaj7"[^FA^ce]', '"Gma7"[B,D^FA]',
+                '"Cmaj7"[EGBd]'
             ].join("|")
-            + ':|'
+            + '|'
         ]
     }
 ]
@@ -80,16 +84,7 @@ const exercises = [
 // })
  
 function renderExercise(exercises) {
-    const width = window.innerWidth
-    const segments = [200, 400, 500]
-    let staffwidth = 100
-    segments.forEach(s => {
-        if (s < width) {
-            staffwidth = s - 20
-        }
-    })
-    console.log(width)
-    console.log(staffwidth)
+    const staffwidth = document.getElementById(exercises[0].id).offsetWidth - 20
 
     const id = exercises.map(obj => obj.id)
     const abc = exercises.map(obj => obj.abc.join("\n"))
