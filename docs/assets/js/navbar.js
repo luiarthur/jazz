@@ -18,6 +18,7 @@ function tag({type, id, classes, attr}) {
 
 // https://getbootstrap.com/docs/5.2/components/navbar/
 export function renderNavBar(anchor) {
+    // FIXME: Missing the frst div.
     const result = document.querySelector(anchor)
     result.classList.add(
         "navbar", "navbar-expand-lg", "navbar-light", "bg-light"
