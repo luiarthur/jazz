@@ -58,12 +58,15 @@ function renderImpliedChords(id) {
     }) 
 }
 
+function renderMajor7(id) {}
+
 function main() {
     // Main.
     renderModes("#table-scales")
     renderScaleOptions("#table-scale-options")
     renderImpliedChords("#table-implied-chords")
     renderNavBar("#navbar-anchor")
+    renderMajor7("#div-major-7-circle")
 
     // Test. Remove when done.
     console.log(modes)

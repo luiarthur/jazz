@@ -16,15 +16,14 @@ function tag({type, id, classes, attr}) {
     return elem
 }
 
-export function renderNavBar3(anchor) {
-    const result = document.querySelector(anchor)
-    const h1 = tag({type: "h4"})
-    h1.innerHTML = "H1"
-    result.appendChild(h1)
+export function renderNavBar(anchor) {
+    const temp = document.querySelector("#template-navbar")
+    const clon = temp.content.cloneNode(true)
+    document.querySelector(anchor).appendChild(clon)
 }
 
-// https://getbootstrap.com/docs/4.0/components/navbar/
-export function renderNavBar(anchor) {
+// https://getbootstrap.com/docs/5.2/components/navbar/
+export function renderNavBarX(anchor) {
     const result = document.querySelector(anchor)
     result.classList.add(
         "navbar", "navbar-expand-lg", "navbar-light", "bg-light"
@@ -46,8 +45,8 @@ export function renderNavBar(anchor) {
             classes: ["navbar-toggler"],
             attr: {
                 type: "button",
-                "data-toggle": "collapse",
-                "data-target": "#navbarNavAltMarkup",
+                "data-bs-toggle": "collapse",
+                "data-bs-target": "#navbarNavAltMarkup",
                 "aria-controls": "navbarNavAltMarkup",
                 "aria-expanded": "false",
                 "aria-label": "Toggle navigation"
@@ -74,9 +73,9 @@ export function renderNavBar(anchor) {
     div.appendChild(navDiv)
 
     const items = [
-        {link: "#", text: "Home"},
-        {link: "#", text: "Item 1"},
-        {link: "#", text: "Item 2"}
+        {link: "#table-scales", text: "Modes"},
+        {link: "#table-scale-options", text: "Scale Options"},
+        {link: "#table-implied-chords", text: "Implied Chords"}
     ]
 
     items.forEach((item, i) => {

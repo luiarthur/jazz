@@ -13,3 +13,9 @@ a:active { text-decoration: none; }
 div#disqus_thread {
   margin-top: 1em;
 }
+
+/*
+nav a {
+  margin-left: 10px;
+}
+*/
