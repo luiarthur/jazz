@@ -1,6 +1,7 @@
 import { modes, scaleOptions, impliedChords } from "./scales.js"
-import { renderNavBar } from "./navbar.js"
+import { renderNavBar, tag } from "./navbar.js"
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm"
+import { exercises } from "./exercises.js"
 import "./disqus.js"
 
 const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1)
@@ -58,40 +59,46 @@ function renderImpliedChords(id) {
     }) 
 }
 
-const exercises = [
-    {
-        id: "div-major-7-circle",
-        abc: [
-            "L:1",
-            "K:C",
-            [
-                '"Cmaj7"[EGBd]', '"Fmaj7"[A,CEG]',
-                '"Bbmaj7"[DFAc]', '"Ebmaj7"[G_Bdf]',
-                '"Abmaj7"[C_EG_B]', '"Dbmaj7"[F_Ac_e]',
-                '"F#maj7"[^A^c^e^g]', '"Bmaj7"[^D^F^A^c]',
-                '"Emaj7"[^GB^d^f]', '"Amaj7"[^CE^GB]',
-                '"Dmaj7"[^FA^ce]', '"Gma7"[B,D^FA]',
-                '"Cmaj7"[EGBd]'
-            ].join("|")
-            + '|'
-        ]
-    }
-]
-
 // FIXME: Does not redraw on resize ...
 // document.addEventListener("resize", (event) => {
 //     renderExercise(exercises)
 // })
- 
-function renderExercise(exercises) {
-    const staffwidth = document.getElementById(exercises[0].id).offsetWidth - 20
+function renderExercise(selector, exercises) {
+    const exerciseDiv = document.querySelector(selector)
+
+    const staffwidth = exerciseDiv.offsetWidth - 20
+
+    // Create HTML.
+    exercises.forEach(exercise => {
+        const h5 = tag({type: "h5"})
+        h5.append(
+            document.createTextNode(exercise.name)
+        )
+        exerciseDiv.append(h5)
+        exerciseDiv.append(
+            tag({type: "div", id: exercise.id})
+        )
+        exerciseDiv.append(tag({type: "br"}))
+    })
 
     const id = exercises.map(obj => obj.id)
-    const abc = exercises.map(obj => obj.abc.join("\n"))
+    const abc = exercises.map((obj, i) => {
+        let music = [`X:${i}`, "L:1", "K:C"].join("\n") 
+        music += "\n|:"
+        music += obj.abc.join("|")
+        music += ":|"
+        console.log(music)
+        return music
+    })
+
     ABCJS.renderAbc(
         id,
         abc.join("\n"),
-        {wrap: true, staffwidth: staffwidth}
+        {
+            wrap: true,
+            staffwidth: staffwidth,
+            jazzchords: true
+        }
     )
 }
 
@@ -101,7 +108,7 @@ function main() {
     renderScaleOptions("#table-scale-options")
     renderImpliedChords("#table-implied-chords")
     renderNavBar("#navbar-anchor")
-    renderExercise(exercises)
+    renderExercise("#exercises", exercises)
 
     // Test. Remove when done.
     console.log(modes)

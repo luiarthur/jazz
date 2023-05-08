@@ -39,7 +39,7 @@ const modes = [
     // Special Scales
     {
         name: "diminished",
-        scale: "1 b2 b3 b4 b5 5 6 b7", from: "special", start: null,
+        scale: "1 2 b3 4 b5 b6 6 7", from: "special", start: null,
         alias: ["half-whole"]
     },
     {

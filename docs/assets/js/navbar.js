@@ -1,4 +1,4 @@
-function tag({type, id, classes, attr}) {
+export function tag({type, id, classes, attr}) {
     const elem = document.createElement(type)
     if (id !== undefined) {
         elem.setAttribute("id", id)
@@ -17,14 +17,13 @@ function tag({type, id, classes, attr}) {
 }
 
 // https://getbootstrap.com/docs/5.2/components/navbar/
-export function renderNavBar(anchor) {
-    // FIXME: Missing the frst div.
-    const result = document.querySelector(anchor)
-    result.classList.add(
-        "navbar", "navbar-expand-lg", "navbar-light", "bg-light"
-    )
+export function renderNavBar(id) {
+    const divContainer = tag({
+        type: "div",
+        classes: ["container-fluid"]
+    })
 
-    result.appendChild((() => {
+    divContainer.appendChild((() => {
         const a = tag({
             type: "a",
             classes: ["navbar-brand"],
@@ -34,15 +33,15 @@ export function renderNavBar(anchor) {
         return a
     })())
 
-    result.appendChild((() => {
+    divContainer.appendChild((() => {
         const button = tag({
             type: "button",
             classes: ["navbar-toggler"],
             attr: {
                 type: "button",
                 "data-bs-toggle": "collapse",
-                "data-bs-target": "#navbarNavAltMarkup",
-                "aria-controls": "navbarNavAltMarkup",
+                "data-bs-target": "#pageNavBar",
+                "aria-controls": "pageNavBar",
                 "aria-expanded": "false",
                 "aria-label": "Toggle navigation"
             }
@@ -59,7 +58,7 @@ export function renderNavBar(anchor) {
     const div = tag({
         type: "div",
         classes: ["collapse", "navbar-collapse"],
-        id: ["navbarNavAltMarkup"]
+        id: ["pageNavBar"]
     })
     const navDiv = tag({
         type: "div",
@@ -71,7 +70,7 @@ export function renderNavBar(anchor) {
         {link: "#table-scales", text: "Modes"},
         {link: "#table-scale-options", text: "Scale Options"},
         {link: "#table-implied-chords", text: "Implied Chords"},
-        {link: "#div-major-7-circle", text: "Major 7 Circle"},
+        {link: "#exercises", text: "Exercises"},
     ]
 
     items.forEach((item, i) => {
@@ -86,6 +85,13 @@ export function renderNavBar(anchor) {
         navDiv.appendChild(a)
     })
 
-    result.appendChild(div)
-    return result
+    divContainer.appendChild(div)
+
+    const nav = document.querySelector(id)
+    nav.classList.add(
+        "navbar", "navbar-expand-lg", "navbar-dark", "bg-dark", 
+        //"sticky-top"
+    )
+    nav.appendChild(divContainer)
+    return nav
 }
