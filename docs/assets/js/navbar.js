@@ -58,7 +58,7 @@ export function renderNavBar(id) {
     const div = tag({
         type: "div",
         classes: ["collapse", "navbar-collapse"],
-        id: ["pageNavBar"]
+        id: "pageNavBar"
     })
     const navDiv = tag({
         type: "div",
@@ -74,13 +74,29 @@ export function renderNavBar(id) {
     ]
 
     items.forEach((item, i) => {
+        const name = `a-${i}-nav-item`
         const a = tag({
             type: "a",
-            attr: {href: item.link},
+            id: name,
+            attr: {
+                href: item.link,
+            },
             classes: ["nav-item", "nav-link"]
         })
         if (i == 0) a.classList.add("active")
         a.innerHTML = item.text
+
+        document.addEventListener("click", (event) => {
+            // Un-highlight all nav items.
+            const navItems = document.querySelectorAll(".nav-item")
+            navItems.forEach(
+                navItem => navItem.classList.remove("active")
+            )
+
+            // Highlight the selected nav item.
+            const elem = document.getElementById(event.target.id)
+            elem.classList.add("active")
+        })
 
         navDiv.appendChild(a)
     })
@@ -90,7 +106,7 @@ export function renderNavBar(id) {
     const nav = document.querySelector(id)
     nav.classList.add(
         "navbar", "navbar-expand-lg", "navbar-dark", "bg-dark", 
-        //"sticky-top"
+        "sticky-top"
     )
     nav.appendChild(divContainer)
     return nav
