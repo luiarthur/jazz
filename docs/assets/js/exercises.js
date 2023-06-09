@@ -26,6 +26,19 @@ export const exercises = [
         ]
     },
     {
+        id: "div-minor-major-7-circle",
+        name: "Rootless Minor Major 7th",
+        abc: [
+            '"Cmin7"[_EGBd]', '"Fmin7"[_A,CEG]',
+            '"Bbmin7"[_DFAc]', '"Ebmin7"[_G_Bdf]',
+            '"Abmin7"[_C_EG_B]', '"Dbmin7"[_F_Ac_e]',
+            '"F#min7"[A^c^e^g]', '"Bmin7"[D^F^A^c]',
+            '"Emin7"[GB^d^f]', '"Amin7"[CE^GB]',
+            '"Dmin7"[FA^ce]', '"Gmin7"[_B,D^FA]',
+            '"Cmin7"[_EGBd]'
+        ]
+    },
+    {
         id: "div-dom-7-circle",
         name: "Rootless Dominant 7th",
         abc: [
