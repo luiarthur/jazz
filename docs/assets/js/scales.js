@@ -48,7 +48,7 @@ const modes = [
     },
     {
         name: "minor blues",
-        scale: "1 b3 4 b5 b b7", from: "special",
+        scale: "1 b3 4 b5 5 b7", from: "special",
         start: null
     },
     {
