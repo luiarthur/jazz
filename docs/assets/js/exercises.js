@@ -4,7 +4,7 @@ export const exercises = [
         name: "Rootless Major 7th",
         abc: [
             '"Cmaj7"[EGBd]', '"Fmaj7"[A,CEG]',
-            '"_Bmaj7"[DFAc]', '"Ebmaj7"[G_Bdf]',
+            '"Bbmaj7"[DFAc]', '"Ebmaj7"[G_Bdf]',
             '"Abmaj7"[C_EG_B]', '"Dbmaj7"[F_Ac_e]',
             '"F#maj7"[^A^c^e^g]', '"Bmaj7"[^D^F^A^c]',
             '"Emaj7"[^GB^d^f]', '"Amaj7"[^CE^GB]',
